@@ -27,12 +27,12 @@ export class AuthGuard implements CanActivate {
     try {
       //Verifico que el token que me estan pasando corresponde a la creacion de tokens basada en mi seed
       const payload = await this.jwtService.verifyAsync<JwtPayload>(
-        token,{secret: process.env.JWT_SEED}
-        );
+        token, { secret: process.env.JWT_SEED }
+      );
         //extraigo el id del usuario del token que me pasan para luego buscarlo y saber si quien esta enviando la peticion existe en la base de datos
-        const user = await this.authService.findUserById(payload.id);
-        if(!user) throw new UnauthorizedException('User no existe');
-        if(!user.isActive) throw new UnauthorizedException('Usuario no activo');
+        const user = await this.authService.findUserById( payload.id );
+        if ( !user ) throw new UnauthorizedException('User does not exists');
+        if ( !user.isActive ) throw new UnauthorizedException('User is not active');
         //en el objeto request en la propiedad user seteo todo el usuario que obtuve desde la base de datos con el metodo findUserById
         request['user'] = user;
     } catch (error) {
@@ -44,7 +44,7 @@ export class AuthGuard implements CanActivate {
 
 
   private extractTokenFromHeader(request:Request):string|undefined{
-    const [type, token] = request.headers['authorization']?.split(' ')??[];
+    const [type, token] = request.headers['authorization']?.split(' ') ?? [];
     return type === 'Bearer' ? token : undefined;
   }
 

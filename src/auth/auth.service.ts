@@ -84,13 +84,11 @@ export class AuthService {
   }
 
   async register(registerDto:RegisterUserDto):Promise<LoginResponse>{
-    const {email, name,password} = registerDto; 
-    const userToCreate : CreateUserDto = {email,name,password};
-    const newUser = await this.create(userToCreate);
+    const user = await this.create( registerDto );
 
     return{
-      user:newUser,
-      token: this.getJWTtoken({id:newUser._id})
+      user:user,
+      token: this.getJWTtoken({id:user._id})
     }
   }
 
@@ -118,13 +116,8 @@ export class AuthService {
   }
 
   getJWTtoken(payload:JwtPayload){
-      console.log("=======================getJWTToken-====================");
-      console.log(payload)
-      let newPayload:JwtPayload = {id:payload.id}
-      console.log(newPayload)
-      const token = this.jwtService.sign(newPayload);
-      console.log(token)
-      return token;
+    const token = this.jwtService.sign(payload);
+    return token;
   }
 
 }

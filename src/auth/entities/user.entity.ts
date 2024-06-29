@@ -12,20 +12,20 @@ export class User {
     _id? : string
     //Defino las propiedades de la entidad en la base
     //usando @Prop y tambien agrego ciertas validaciones
-    @Prop({unique:true,required:true})
-    email:string;
+    @Prop({ unique: true, required: true })
+    email: string;
 
-    @Prop({required:true})
-    name:string;
+    @Prop({ required: true })
+    name: string;
 
-    @Prop({minlength:6,required:true})
-    password?:string;
+    @Prop({ minlength: 6, required: true })
+    password?: string;
 
-    @Prop({default:true})
-    isActive:boolean;
+    @Prop({ default: true })
+    isActive: boolean;
 
-    @Prop({type:[String],default:['user']})
-    roles:string[];
+    @Prop({ type: [String], default: ['user'] })
+    roles: string[];
 
 }
 //Creo y exporto un nuevo schema que tendra la estrucura que defini arriba

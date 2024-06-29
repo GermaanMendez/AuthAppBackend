@@ -5,18 +5,16 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
-    AuthModule,
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(process.env.MONGO_URL)
+    MongooseModule.forRoot(process.env.MONGO_URL, {
+      dbName:process.env.MONGO_DB_NAME
+    }),
+    AuthModule,
   ],
   controllers: [],
   providers: [],
 })
 export class AppModule {
 
-
-  constructor(){
-    console.log(process.env)
-  }
 
 }
