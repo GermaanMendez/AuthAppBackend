@@ -16,16 +16,22 @@ export class User {
     email: string;
 
     @Prop({ required: true })
-    name: string;
+    firstName: string;
+
+    @Prop({ required: true })
+    lastName: string;
 
     @Prop({ minlength: 6, required: true })
     password?: string;
+
+    @Prop()
+    date: Date;
 
     @Prop({ default: true })
     isActive: boolean;
 
     @Prop({ type: [String], default: ['user'] })
-    roles: string[];
+    role: string[];
 
 }
 //Creo y exporto un nuevo schema que tendra la estrucura que defini arriba

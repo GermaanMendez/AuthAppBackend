@@ -1,14 +1,24 @@
-import { IsEmail, IsString, MinLength } from "class-validator";
+import { IsDate, IsEmail, IsString, MinLength } from "class-validator";
+
 
 export class RegisterUserDto {
 
-    @IsEmail()
-    email:string;
+    @IsString()
+    firstName: string;
 
     @IsString()
-    name:string;
+    lastName:string;
 
-    @MinLength(6)
+    @IsEmail()
+    email: string;
+    
+    @IsDate()
+    date:Date;
+
+    @IsString()
+    role: string;
+    
+    @MinLength(5) @IsString() 
     password:string;
 
 }

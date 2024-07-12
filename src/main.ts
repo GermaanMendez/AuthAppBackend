@@ -3,7 +3,9 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: ['error', 'warn', 'log'], // Asegúrate de incluir todos los niveles que quieras ver
+  });
   app.enableCors() 
 
   //Agrego esta configuracion para poder usar
@@ -16,6 +18,7 @@ async function bootstrap() {
     })
   )
 
+  console.log("App correindo en port" + process.env.PORT)
   await app.listen(process.env.PORT || 3000);
   // await app.listen(process.env.PORT || 3000);
 }
